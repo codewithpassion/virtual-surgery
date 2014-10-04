@@ -1,0 +1,26 @@
+
+<link href="//vjs.zencdn.net/4.9/video-js.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/4.9/video.js"></script>
+<h1>Course 1</h1>
+
+<video id="course1_video" class="video-js vjs-default-skin"
+       preload="metadata" width="800" height="600"
+       data-setup='{"controls":true}'>
+  <source src="assets/course1.mp4" type='video/mp4' />
+  <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>
+
+<script type="application/javascript">
+  $( document ).ready(function() {
+    var player = videojs('course1_video');
+    player.ready(function() {
+      var myPlayer = this;
+      myPlayer.play();
+      setTimeout(function() {
+        alert(myPlayer.currentTime());
+        myPlayer.currentTime(120);
+      }, 5000);
+
+    });
+  });
+</script>
