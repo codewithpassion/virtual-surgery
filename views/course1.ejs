@@ -22,10 +22,10 @@
 <div id="quiz1" class="hide questionnaire">
   <i>What is this structure?</i>
   <ul class="unstyled">
-    <li class="quiz1" data-answer="A">A) Adhesions</li>
-    <li class="quiz1" data-answer="B">B) Posterior cystic artery</li>
-    <li class="quiz1" data-answer="C">C) Right hepatic artery</li>
-    <li class="quiz1" data-answer="D">D) Cystic duct</li>
+    <li><a href="#" class="quiz1" data-answer="A">A) Adhesions</a></li>
+    <li><a href="#" class="quiz1" data-answer="B">B) Posterior cystic artery</a></li>
+    <li><a href="#" class="quiz1" data-answer="C">C) Right hepatic artery</a></li>
+    <li><a href="#" class="quiz1" data-answer="D">D) Cystic duct</a></li>
   </ul>
 </div>
 
@@ -41,6 +41,7 @@
       { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'someURL/' }
     ];
 
+    var achievedQuizes = [];
 
     var player = videojs('course1_video');
     player.ready(function() {
@@ -63,7 +64,8 @@
               textSet = true;
             }
           }
-          if (text.quiz === true) {
+
+          if (myPlayer.currentTime() >= text.start && text.quiz === true && achievedQuizes.indexOf(text.layerId) == -1) {
             myPlayer.pause();
             $('#' + text.layerId).removeClass('hide');
           }
@@ -71,6 +73,23 @@
         });
         if (!textSet) { $('#textOverlay').text(''); }
       });
+
+      $('.quiz1').click(function() {
+        var item = this;
+        var quiz = overlayText.filter(function(item) { return item.layerId === 'quiz1' })[0];
+        if (quiz) {
+          var answer = $(item).attr('data-answer');
+          if (quiz.correctAnswer === answer) {
+            alert('Congratulation, this is correct! Let\'s go on!');
+            $('#quiz1').hide();
+            achievedQuizes.push('quiz1');
+            myPlayer.play();
+          }
+          else {
+            alert('Uhh, not quite');
+          }
+        }
+      })
     });
   });
 </script>
