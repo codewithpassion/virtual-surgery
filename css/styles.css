@@ -3,3 +3,28 @@ body {
   font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
+
+.wrapper{
+	z-index: 0;
+}
+
+.questionnaire{
+    position: absolute;
+	z-index: 2;
+	color: white;
+	font-size: 24px;
+	left: 10%;
+	right: 10%;
+	bottom:10%;
+    background-color: rgba(83, 83, 83, 0.64);
+    padding: 10px;
+	
+}
+.questionnaire a {
+	color: #041C30;
+}
+.video {
+    position: absolute;
+	z-index: 1;
+	
+}

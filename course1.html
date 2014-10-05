@@ -12,7 +12,7 @@
   <nav class="navabar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
-        <a href="#">Virtual surgery - Course1</a>
+        <a href="#">Virtual surgery - Course 1</a>
       </div>
     </div>
   </nav>
@@ -36,11 +36,11 @@
 
 
 
-<div id="textOverlay" class="questionnaire"></div>
+<div id="textOverlay" class="hide questionnaire"></div>
 
 <div id="quiz1" class="hide questionnaire">
   <i>What is this structure?</i>
-  <ul class="unstyled">
+  <ul class="list-unstyled">
     <li><a href="#" class="quiz1" data-answer="A">A) Adhesions</a></li>
     <li><a href="#" class="quiz1" data-answer="B">B) Posterior cystic artery</a></li>
     <li><a href="#" class="quiz1" data-answer="C">C) Right hepatic artery</a></li>
@@ -48,15 +48,11 @@
   </ul>
 </div>
 
-
-
-
-
 <script type="application/javascript">
   $( document ).ready(function() {
 
     var overlayText = [
-      { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.cdddddddddddddddddddddddddddd sdd fa sdf af adf afd adf adsf adf adf afd '},
+      { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
       { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'someURL/' }
     ];
 
@@ -73,24 +69,24 @@
       myPlayer.on('timeupdate', function() {
         var textSet = false;
         overlayText.forEach(function(text) {
-          //console.log(myPlayer.currentTime());
-		  
           if (myPlayer.currentTime() >= text.start) {
-		  
-		  if (myPlayer.currentTime() <= text.end) {
-            if (!text.quiz) {
-              $('#textOverlay').text(text.text);
-              textSet = true;
+      		  if (myPlayer.currentTime() <= text.end) {
+              if (!text.quiz) {
+                $('#textOverlay').text(text.text);
+                $('#textOverlay').removeClass('hide');
+                textSet = true;
+              }
             }
-          }
-
-          if (myPlayer.currentTime() >= text.start && text.quiz === true && achievedQuizes.indexOf(text.layerId) == -1) {
-            myPlayer.pause();
-            $('#' + text.layerId).removeClass('hide');
-          }
-		  }
+            if (myPlayer.currentTime() >= text.start && text.quiz === true && achievedQuizes.indexOf(text.layerId) == -1) {
+              myPlayer.pause();
+              $('#' + text.layerId).removeClass('hide');
+            }
+    		  }
         });
-        if (!textSet) { $('#textOverlay').text(''); }
+        if (!textSet) { 
+          $('#textOverlay').text(''); 
+          $('#textOverlay').addClass('hide'); 
+        }
       });
 
       $('.quiz1').click(function() {
