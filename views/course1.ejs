@@ -13,11 +13,11 @@
 
 <div id="quiz1" class="hide">
   <i>What is this structure?</i>
-  <ul>
-    <li>A) Adhesions</li>
-    <li>B) Posterior cystic artery</li>
-    <li>C) Right hepatic artery</li>
-    <li>D) Cystic duct</li>
+  <ul class="unstyled">
+    <li class="quiz1" data-answer="A">A) Adhesions</li>
+    <li class="quiz1" data-answer="B">B) Posterior cystic artery</li>
+    <li class="quiz1" data-answer="C">C) Right hepatic artery</li>
+    <li class="quiz1" data-answer="D">D) Cystic duct</li>
   </ul>
 </div>
 
@@ -26,7 +26,7 @@
 
     var overlayText = [
       { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
-      { start: 310, quiz:true, layerId: 'quiz1' }
+      { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'someURL/' }
     ];
 
 
@@ -34,7 +34,7 @@
     player.ready(function() {
       var myPlayer = this;
       myPlayer.on('loadedmetadata', function(){
-        myPlayer.currentTime(4*60 + 55);
+        myPlayer.currentTime(5*60 + 5);
         myPlayer.play();
       });
 
