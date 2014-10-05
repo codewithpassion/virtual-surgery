@@ -10,9 +10,17 @@ body {
 
 .questionnaire{
     position: absolute;
-	text-align: center;
 	z-index: 2;
-	background-color: green;
+	color: white;
+	font-size: 100%;
+	left: 10%;
+	right 10%;
+	bottom:10%;
+	  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 	
 }
 .video {
