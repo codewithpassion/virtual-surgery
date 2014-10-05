@@ -9,6 +9,11 @@
   <script src="vendor/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
+
+  <div id="overlayBlock" class="overlayWindow">
+<iframe src="" id="iOverlay" class="overlayWindow" ></iframe>
+</div>
+
   <nav class="navabar navbar-default" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -23,7 +28,6 @@
 <link href="css/styles.css" type="text/css" rel="stylesheet" />
 
 <h1>Laparoscopic Cholecystectomy</h1>
-
 
 <div class="video">
 
@@ -50,10 +54,10 @@
 
 <script type="application/javascript">
   $( document ).ready(function() {
-
+		$('#overlayBlock').hide();
     var overlayText = [
       { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
-      { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'someURL/' },
+      { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'review1.html' },
       { start: 311, end: 326, quiz: false, text: 'The surgeon is burning the posterior cystic artery proximally and distally, and dividing between. You can now get a better appreciation of the anatomy.'},
       //q2
       { start: 326, end: 349, quiz: false, text: 'This is an incomplete critical view, identifying the cystic duct entering the infundibulum, with the cystic plate cleared, only after the cystic artery has been clipped. A true critical view would identify two, and only two, structures entering the gallbladder, with the cystic plate (the liver bed behind the infundibulum) exposed. This is not always possible in a difficult case. The surgeon is now clearing off the back of the duct to ensure that only one structure is entering the gallbladder before clipping.'},
@@ -104,7 +108,8 @@
             myPlayer.play();
           }
           else {
-            alert('Uhh, not quite');
+            $('#overlayBlock').show();
+			$('#iOverlay').attr('src', quiz.slidesSource);
           }
         }
       })

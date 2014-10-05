@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Virtual surgery - laparoscopic cholecystectomy</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"/>
+  <script src="/vendor/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="p1">
+</div>
+
+<div id="quiz1">
+  <i>Describe the most common vascular supply of the gallbladder, starting from the aorta. </i>
+  <ul class="list-unstyled">
+    <li><a href="#" class="quiz1" data-answer="A">Aorta -> Celiac trunk -> Common hepatic artery -> Left hepatic artery -> Cystic artery
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="B">Aorta -> Celiac trunk -> Common hepatic artery -> Right hepatic artery -> Cystic artery
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="C">Aorta -> Superior mesenteric artery -> Common hepatic artery -> Cystic artery
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="D">Aorta -> Superior mesenteric artery -> Right hepatic artery -> Cystic artery
+</a></li>
+  </ul>
+</div>
+
+<div id="quiz2">
+  <i>What is the most common origin of a replaced right hepatic artery?</i>
+  <ul class="list-unstyled">
+    <li><a href="#" class="quiz1" data-answer="A">Celiac trunk
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="B">Left hepatic artery
+
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="C">Superior mesenteric artery
+
+</a></li>
+    <li><a href="#" class="quiz1" data-answer="D">Inferior mesenteric artery
+
+</a></li>
+  </ul>
+</div>
+
+
+</body>
+
+
+<script type="application/javascript">
+	function iterativeHide(term,idArray) {
+		idArray.forEach(function(spot){ 
+			$("#" + spot).hide();
+		}  
+
+	}
+
+  $( document ).ready(function() {
+  
+	var index=1;
+	var idArray = [ "p1","p2","p3","p4","p5","p6","quiz1","quiz2"]
+	iterativeHide(index,idArray);
+
+	
+	}
+      $('.quiz1').click(function() {
+        var item = this;
+        var quiz = overlayText.filter(function(item) { return item.layerId === 'quiz1' })[0];
+        if (quiz) {
+          var answer = $(item).attr('data-answer');
+          if (quiz.correctAnswer === answer) {
+            alert('Congratulation, this is correct! Let\'s go on!');
+			index = index+1;
+          }
+          else {
+            index=1;
+			alert('Please review the reading again');
+          }
+        }
+      }
+	  iterativeHide(index);
+	  	
+	  )
+    }
+);
+	
+	
+</script>
+
+</html>
