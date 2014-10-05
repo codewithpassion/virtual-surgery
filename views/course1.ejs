@@ -9,12 +9,12 @@
   <source src="assets/course1.mp4" type='video/mp4' />
   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 </video>
-
+<div id="textOverlay"></div>
 <script type="application/javascript">
   $( document ).ready(function() {
 
     var overlayText = [
-      { start: 300, end: 307, quiz:false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
+      { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
       { start: 310, quiz:true, layerId: 'quiz1' }
     ];
 
@@ -22,11 +22,27 @@
     var player = videojs('course1_video');
     player.ready(function() {
       var myPlayer = this;
-      //myPlayer.play();
       myPlayer.on('loadedmetadata', function(){
-        myPlayer.currentTime(5*60);
+        myPlayer.currentTime(4*60 + 55);
         myPlayer.play();
-      })
+      });
+
+      myPlayer.on('timeupdate', function() {
+        var textSet = false;
+        overlayText.forEach(function(text) {
+          console.log(myPlayer.currentTime());
+          if (myPlayer.currentTime() >= text.start && myPlayer.currentTime() <= text.end) {
+            if (!text.quiz) {
+              $('#textOverlay').text(text.text);
+              textSet = true;
+            }
+          }
+          if (myPlayer.currentTime() >= text.start && text.quiz === true) {
+            myPlayer.pause();
+          }
+        });
+        if (!textSet) { $('#textOverlay').text(''); }
+      });
     });
   });
 </script>
