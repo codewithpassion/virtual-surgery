@@ -15,12 +15,11 @@
     var player = videojs('course1_video');
     player.ready(function() {
       var myPlayer = this;
-      myPlayer.play();
-      setTimeout(function() {
-        alert(myPlayer.currentTime());
-        myPlayer.currentTime(120);
-      }, 5000);
-
+      //myPlayer.play();
+      myPlayer.on('loadedmetadata', function(){
+        myPlayer.currentTime(5*60);
+        myPlayer.play();
+      })
     });
   });
 </script>
