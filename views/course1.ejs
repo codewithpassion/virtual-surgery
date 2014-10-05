@@ -5,11 +5,22 @@
 
 <video id="course1_video" class="video-js vjs-default-skin"
        preload="metadata" width="800" height="600"
-       data-setup='{"controls":true}'>
+       data-setup='{"controls":false}'>
   <source src="assets/course1.mp4" type='video/mp4' />
   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 </video>
 <div id="textOverlay"></div>
+
+<div id="quiz1" class="hide">
+  <i>What is this structure?</i>
+  <ul>
+    <li>A) Adhesions</li>
+    <li>B) Posterior cystic artery</li>
+    <li>C) Right hepatic artery</li>
+    <li>D) Cystic duct</li>
+  </ul>
+</div>
+
 <script type="application/javascript">
   $( document ).ready(function() {
 
@@ -39,6 +50,7 @@
           }
           if (myPlayer.currentTime() >= text.start && text.quiz === true) {
             myPlayer.pause();
+            $('#' + text.layerId).removeClass('hide');
           }
         });
         if (!textSet) { $('#textOverlay').text(''); }
