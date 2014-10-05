@@ -15,10 +15,21 @@
 
 <video id="course1_video" class="video-js vjs-default-skin"
        preload="metadata" width="800" height="600"
-       data-setup='{"controls":true}'>
+       data-setup='{"controls":false}'>
   <source src="assets/course1.mp4" type='video/mp4' />
   <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
 </video>
+<div id="textOverlay"></div>
+
+<div id="quiz1" class="hide">
+  <i>What is this structure?</i>
+  <ul class="unstyled">
+    <li class="quiz1" data-answer="A">A) Adhesions</li>
+    <li class="quiz1" data-answer="B">B) Posterior cystic artery</li>
+    <li class="quiz1" data-answer="C">C) Right hepatic artery</li>
+    <li class="quiz1" data-answer="D">D) Cystic duct</li>
+  </ul>
+</div>
 
 	</div>
 
@@ -29,19 +40,36 @@
   $( document ).ready(function() {
 
     var overlayText = [
-      { start: 300, end: 307, quiz:false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
-      { start: 310, quiz:true, layerId: 'quiz1' }
+      { start: 300, end: 307, quiz: false, text: 'The cystic artery has been clipped and divided, and the surgeon zooms back for a wider view.'},
+      { start: 310, quiz:true, layerId: 'quiz1', correctAnswer: 'B', slidesSource: 'someURL/' }
     ];
 
 
     var player = videojs('course1_video');
     player.ready(function() {
       var myPlayer = this;
-      //myPlayer.play();
       myPlayer.on('loadedmetadata', function(){
-        myPlayer.currentTime(5*60);
+        myPlayer.currentTime(5*60 + 5);
         myPlayer.play();
-      })
+      });
+
+      myPlayer.on('timeupdate', function() {
+        var textSet = false;
+        overlayText.forEach(function(text) {
+          console.log(myPlayer.currentTime());
+          if (myPlayer.currentTime() >= text.start && myPlayer.currentTime() <= text.end) {
+            if (!text.quiz) {
+              $('#textOverlay').text(text.text);
+              textSet = true;
+            }
+          }
+          if (myPlayer.currentTime() >= text.start && text.quiz === true) {
+            myPlayer.pause();
+            $('#' + text.layerId).removeClass('hide');
+          }
+        });
+        if (!textSet) { $('#textOverlay').text(''); }
+      });
     });
   });
 </script>
