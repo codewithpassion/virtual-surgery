@@ -56,7 +56,11 @@
 
   document.closeIframe = function() {
     $('#overlayBlock').hide();
-    myPlayer.play();
+    var player = videojs('course1_video');
+    player.ready(function() {
+      var myPlayer = this;
+      myPlayer.play();
+    });
   }
 
   $( document ).ready(function() {
