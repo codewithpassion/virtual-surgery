@@ -8,82 +8,155 @@
   <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"/>
   <script src="/vendor/jquery/dist/jquery.min.js"></script>
 </head>
-<body>
+<style>
 
-<div id="p1">
+#content {
+  margin-left: auto ;
+  margin-right: auto ;
+	width : 960px;
+	height: 720px;
+  background-color : #446447;
+  color : #FFFFFF;
+  z-index: 0;
+  
+}
+#bg-img {
+max-width:100%;
+max-height:100%;
+position:absolute;
+
+}
+
+#background {
+	position: absolute;
+	width : 960px;
+	height: 720px;
+}
+
+.pic {
+position:absolute;
+z-index: 2;
+}
+
+.quiz {
+position:absolute;
+	font-size: 30px;
+	top:10%;
+	z-index: 2;
+}
+
+
+</style>
+<body id="content">
+
+<div id="background">
+
+<div id="p0" class="pic" >
+<img src="slides/quiz1/img0.png" alt="">
 </div>
 
-<div id="quiz1">
+<div id="p1" class="pic">
+<img src="slides/quiz1/img1.png" alt="">
+</div>
+
+<div id="p2" class="pic">
+<img src="slides/quiz1/img2.png" alt="">
+</div>
+
+<div id="p3" class="pic">
+<img src="slides/quiz1/img3.png" alt="">
+</div>
+
+<div id="p4" class="pic">
+<img src="slides/quiz1/img4.png" alt="">
+</div>
+
+<div id="quiz1" class="quiz">
   <i>Describe the most common vascular supply of the gallbladder, starting from the aorta. </i>
   <ul class="list-unstyled">
-    <li><a href="#" class="quiz1" data-answer="A">Aorta -> Celiac trunk -> Common hepatic artery -> Left hepatic artery -> Cystic artery
+    <li><a href="#" class="quiz1 answer" data-answer="answer">A) Aorta -> Celiac trunk -> Common hepatic artery -> Left hepatic artery -> Cystic artery
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="B">Aorta -> Celiac trunk -> Common hepatic artery -> Right hepatic artery -> Cystic artery
+    <li><a href="#" class="quiz1" data-answer="B">B) Aorta -> Celiac trunk -> Common hepatic artery -> Right hepatic artery -> Cystic artery
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="C">Aorta -> Superior mesenteric artery -> Common hepatic artery -> Cystic artery
+    <li><a href="#" class="quiz1" data-answer="C">C) Aorta -> Superior mesenteric artery -> Common hepatic artery -> Cystic artery
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="D">Aorta -> Superior mesenteric artery -> Right hepatic artery -> Cystic artery
+    <li><a href="#" class="quiz1" data-answer="D">D) Aorta -> Superior mesenteric artery -> Right hepatic artery -> Cystic artery
 </a></li>
   </ul>
 </div>
 
-<div id="quiz2">
+<div id="quiz2" class="quiz">
   <i>What is the most common origin of a replaced right hepatic artery?</i>
   <ul class="list-unstyled">
-    <li><a href="#" class="quiz1" data-answer="A">Celiac trunk
+    <li><a href="#" class="quiz1" data-answer="A">A) Celiac trunk
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="B">Left hepatic artery
+    <li><a href="#" class="quiz1" data-answer="answer">B) Left hepatic artery
 
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="C">Superior mesenteric artery
+    <li><a href="#" class="quiz1" data-answer="C">C) Superior mesenteric artery
 
 </a></li>
-    <li><a href="#" class="quiz1" data-answer="D">Inferior mesenteric artery
+    <li><a href="#" class="quiz1" data-answer="D">D) Inferior mesenteric artery
 
 </a></li>
   </ul>
 </div>
+
+<img src="slides/quiz1/background.png" id="bg-img" alt="">
+</div>
+<!-- I don't actually know what the answers are for these... I just made them something random -->
+
 
 
 </body>
 
 
 <script type="application/javascript">
-	function iterativeHide(term,idArray) {
-		idArray.forEach(function(spot){ 
-			$("#" + spot).hide();
-		}  
-
-	}
 
   $( document ).ready(function() {
   
 	var index=1;
-	var idArray = [ "p1","p2","p3","p4","p5","p6","quiz1","quiz2"]
-	iterativeHide(index,idArray);
+	var idArray = ["p0","p1","p2","p3","p4","quiz1","quiz2"];
+iterativeHide(index,idArray); //Hide on first start
 
-	
-	}
+
       $('.quiz1').click(function() {
         var item = this;
-        var quiz = overlayText.filter(function(item) { return item.layerId === 'quiz1' })[0];
-        if (quiz) {
-          var answer = $(item).attr('data-answer');
-          if (quiz.correctAnswer === answer) {
-            alert('Congratulation, this is correct! Let\'s go on!');
+          if ($(item).attr('data-answer') === "answer") {
+            alert('Congratulations, this is correct! Let\'s go on!');
 			index = index+1;
           }
           else {
             index=1;
 			alert('Please review the reading again');
-          }
         }
-      }
-	  iterativeHide(index);
-	  	
-	  )
+			  iterativeHide(index,idArray); //Visibility after quiz click.
+      })
+	  
+	        $('.pic').click(function() {
+			index = index+1;
+			iterativeHide(index,idArray); //Visibility after quiz click.
+			});
+
+	  
+	  
+});
+
+function iterativeHide(term,idArrayit) {
+    idArrayit.forEach(function(spot) {
+        $("#" + spot).hide();
+    });
+    $("#" + idArrayit[term] ).show();
+	
+		if (term>=idArrayit.length) {
+    //quit
+	window.parent.document.closeIframe();
     }
-);
+}
+
+
+
+
 	
 	
 </script>
